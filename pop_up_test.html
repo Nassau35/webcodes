@@ -1,72 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Popup Example</title>
-  <style>
-    /* Style for the popup container */
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: none; /* Hidden by default */
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-    /* Style for the popup box */
-    .popup-box {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
-      text-align: center;
-    }
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
 
-    /* Close button style */
-    .close-btn {
-      background-color: #ff5c5c;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
 
-    .close-btn:hover {
-      background-color: #ff3333;
-    }
-  </style>
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+</style>
 </head>
-<body>
-  <!-- Button to trigger the popup -->
-  <button onclick="openPopup()">Show Message</button>
+<body style="text-align:center">
 
-  <!-- Popup structure -->
-  <div class="popup-overlay" id="popup">
-    <div class="popup-box">
-      <p>This is your embedded message!</p>
-      <button class="close-btn" onclick="closePopup()">Close</button>
-    </div>
-  </div>
+<h2>Popup</h2>
 
-  <script>
-    // Function to open the popup
-    function openPopup() {
-      document.getElementById('popup').style.display = 'flex';
-    }
+<div class="popup" onclick="myFunction()">Click me to toggle the popup!
+  <span class="popuptext" id="myPopup">A Simple Popup!</span>
+</div>
 
-    // Function to close the popup
-    function closePopup() {
-      document.getElementById('popup').style.display = 'none';
-    }
-  </script>
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+
 </body>
 </html>
-
